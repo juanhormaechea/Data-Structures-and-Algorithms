@@ -1,9 +1,11 @@
-#ifndef __DEFINITIONS_H
-#define __DEFINITIONS_H
+#ifndef __ALGOS_H
+#define __ALGOS_H
 
 int* bubble_sort(int* arr, int length);
 
 int* selection_sort(int* arr, int length);
+
+int* insertion_sort(int* arr, int length);
 
 int* quick_sort(int* arr, int length);
 
