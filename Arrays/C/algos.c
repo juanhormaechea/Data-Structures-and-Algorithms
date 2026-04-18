@@ -78,11 +78,10 @@ int partition(int* arr, int length) {
 };
 
 int* quicksort(int* arr, int length) {
-    if (length == 1 || length == 0) {
-        return arr;
-    } else {
+   if (length > 1) {
         int new_length = partition(arr, length);
         quicksort(arr, new_length);
         quicksort(&arr[new_length], length-new_length);
     };
+    return arr;
 };

@@ -13,7 +13,7 @@ int main() {
    printf("\n");
    int* sorted_arr = quicksort(arr, sizeof(arr)/sizeof(int));
    for (int j = 0; j < sizeof(arr)/sizeof(int); j++) {
-      printf("%d ", arr[j]);
+      printf("%d ", sorted_arr[j]);
    }
 
 }
