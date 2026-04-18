@@ -7,7 +7,7 @@ int* selection_sort(int* arr, int length);
 
 int* insertion_sort(int* arr, int length);
 
-int* quick_sort(int* arr, int length);
+int* quicksort(int* arr, int length);
 
 int* merge_sort(int* arr, int length);
 

@@ -60,3 +60,29 @@ int* insertion_sort(int* arr, int length) {
     return arr;
 };
 
+
+int partition(int* arr, int length) {
+    int i = 0;
+    int pivot = arr[length-1];
+    for (int j = 0; j < length-1; j++) {
+        if (arr[j] < pivot) {
+            int swap = arr[j];
+            arr[j] = arr[i];
+            arr[i] = swap;
+            i++;
+        };
+    };
+    arr[length-1] = arr[i];
+    arr[i] = pivot;
+    return i;
+};
+
+int* quicksort(int* arr, int length) {
+    if (length == 1 || length == 0) {
+        return arr;
+    } else {
+        int new_length = partition(arr, length);
+        quicksort(arr, new_length);
+        quicksort(&arr[new_length], length-new_length);
+    };
+};
