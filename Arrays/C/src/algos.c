@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+ //worst case time complexity of O(n^2), when pivot is highest or lowest element
+ // average time complexity O(nlogn)
 int* bubble_sort(int* arr, int length) {
+
     bool swap = false;
     for (int i = 0; i < length; i++) {
         swap = false;
@@ -20,6 +23,7 @@ int* bubble_sort(int* arr, int length) {
     return arr;
 };
 
+//time complexity of O(n^2)
 int* selection_sort(int* arr, int length) {
     for (int i = 0; i < length; i++) {
         int min = arr[i];
@@ -38,6 +42,7 @@ int* selection_sort(int* arr, int length) {
     return arr;
 };
 
+//time complexity of O(n^2)
 int* insertion_sort(int* arr, int length) {
     for (int i = 0; i < length-1; i++) {
         int index = i+1;
@@ -60,7 +65,8 @@ int* insertion_sort(int* arr, int length) {
     return arr;
 };
 
-
+//partition function for quicksort, moves all elements less than pivot to the left
+//and all elements greater or equal to pivot to the right
 int partition(int* arr, int length) {
     int i = 0;
     int pivot = arr[length-1];
@@ -77,6 +83,8 @@ int partition(int* arr, int length) {
     return i;
 };
 
+//worst case time complexity of O(n^2), occurs when array is already sorted.
+//average time complexity of O(nlog_2(n))
 int* quicksort(int* arr, int length) {
    if (length > 1) {
         int new_length = partition(arr, length);
