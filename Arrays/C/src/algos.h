@@ -9,6 +9,8 @@ int* insertion_sort(int* arr, int length);
 
 int* quicksort(int* arr, int length);
 
+int* counting_sort(int* arr, int length);
+
 int* merge_sort(int* arr, int length);
 
 int linear_search(int* arr, int length);

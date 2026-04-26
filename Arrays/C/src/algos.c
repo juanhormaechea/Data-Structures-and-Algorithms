@@ -1,9 +1,9 @@
 #include "algos.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
- //worst case time complexity of O(n^2), when pivot is highest or lowest element
- // average time complexity O(nlogn)
+ //worst case time complexity of O(n^2)
 int* bubble_sort(int* arr, int length) {
 
     bool swap = false;
@@ -68,6 +68,9 @@ int* insertion_sort(int* arr, int length) {
 //partition function for quicksort, moves all elements less than pivot to the left
 //and all elements greater or equal to pivot to the right
 int partition(int* arr, int length) {
+    if (length == 0) {
+        return 0;
+    }
     int i = 0;
     int pivot = arr[length-1];
     for (int j = 0; j < length-1; j++) {
@@ -80,6 +83,9 @@ int partition(int* arr, int length) {
     };
     arr[length-1] = arr[i];
     arr[i] = pivot;
+    if (i == 0){
+        return 1;
+    }
     return i;
 };
 
@@ -93,3 +99,40 @@ int* quicksort(int* arr, int length) {
     };
     return arr;
 };
+
+
+// O(n+k) time complexity where k is the max value in array
+int* counting_sort(int* arr, int length) {
+    if (length <= 0) {
+        return arr;
+    };
+
+    int max = 0;
+    for (int i = 0; i < length; i++) {
+        if (arr[i] < 0) {
+            return NULL;
+        }
+        if (arr[i] > max) {
+            max = arr[i];
+        };
+    };
+
+    int* sorted_arr = calloc(max+1, sizeof(int));
+
+
+    
+    for (int i = 0; i < length; i++) {
+        sorted_arr[arr[i]] += 1;
+    };
+
+    int index = 0;
+    for (int i = 0; i < max+1; i++) {
+        for (int a = 0; sorted_arr[i] > 0; a++){
+            arr[index] = i;
+            index++;
+            sorted_arr[i]--;
+        };
+    };
+
+    return arr;
+}
