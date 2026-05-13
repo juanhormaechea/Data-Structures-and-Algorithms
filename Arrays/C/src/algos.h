@@ -13,9 +13,9 @@ int* counting_sort(int* arr, int length);
 
 int* merge_sort(int* arr, int length);
 
-int linear_search(int* arr, int length);
+int linear_search(int* arr, int length, int target);
 
-int binary_search(int* arr, int length);
+int binary_search(int* arr, int length, int target);
 
 
 

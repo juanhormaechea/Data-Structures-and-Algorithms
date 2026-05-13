@@ -90,7 +90,7 @@ int partition(int* arr, int length) {
 };
 
 //worst case time complexity of O(n^2), occurs when array is already sorted.
-//average time complexity of O(nlog_2(n))
+//average time complexity of O(n·log_2(n))
 int* quicksort(int* arr, int length) {
    if (length > 1) {
         int new_length = partition(arr, length);
@@ -188,6 +188,7 @@ int* merge(int* arr1, int* arr2, int length1, int length2) {
     return new_arr;
 }
 
+// time complexity of O(n·log_2(n))
 int* merge_sort(int* arr, int length){
     if (length <= 1) {
         return arr;
@@ -205,4 +206,36 @@ int* merge_sort(int* arr, int length){
     
     
 
+}
+
+// time complexity of O(n)
+int linear_search(int* arr, int length, int target) {
+    for (int i = 0; i < length; i++) {
+        if (arr[i] == target) {
+            return i;
+        };
+    };
+
+    return -1;
+};
+
+// time complexity of O(log_2(n))
+int binary_search(int* arr, int length, int target) {
+    int left = 0;
+    int right = length - 1;
+
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (arr[mid] == target) {
+            return mid;
+        }
+
+        if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    };
+
+    return -1;
 }

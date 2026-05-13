@@ -340,6 +340,97 @@ void test_merge_sort_sort_negative_values(void) {
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
 }
 
+// test for linear search
+
+void test_linearsearch_search_empty_array(void) {
+    int input[] = {};
+    int length = 0;
+
+    TEST_ASSERT_EQUAL_INT(-1, linear_search(input, length, 1));
+};
+
+void test_linearsearch_search_first_element(void) {
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int length = 12;
+
+    TEST_ASSERT_EQUAL_INT(0, linear_search(input, length, 5));
+};
+
+void test_linearsearch_search_last_element(void) {
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int length = 12;
+
+    TEST_ASSERT_EQUAL_INT(11, linear_search(input, length, 22));
+};
+
+void test_linearsearch_search_first_element_seen(void) {
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int length = 12;
+
+    TEST_ASSERT_EQUAL_INT(4, linear_search(input, length, 53));
+};
+
+void test_linearsearch_search_negative_values_first_element(void) {
+    int input[] = {-1, -9, -2, -7, -5, -3, -12, -24, -3};
+    int length = 9;
+
+    TEST_ASSERT_EQUAL_INT(0, linear_search(input, length, -1));
+};
+
+void test_linearsearch_search_negative_values_last_element(void) {
+    int input[] = {-1, -9, -2, -7, -5, -3, -12, -24, -16};
+    int length = 9;
+
+    TEST_ASSERT_EQUAL_INT(8, linear_search(input, length, -16));
+};
+
+void test_linearsearch_search_negative_values_first_element_seen(void) {
+    int input[] = {-1, -9, -2, -7, -5, -3, -12, -24, -3};
+    int length = 9;
+
+    TEST_ASSERT_EQUAL_INT(5, linear_search(input, length, -3));
+};
+
+// test cases for binary search
+
+void test_binary_search_search_empty_array(void) {
+    int input[] = {};
+    int length = 0;
+
+    TEST_ASSERT_EQUAL_INT(-1, binary_search(input, length, 1));
+};
+
+void test_binary_search_search_first_element(void) {
+    int input[] = {1, 3, 5, 17, 21, 22, 53, 53, 53, 59, 102, 116};
+    int length = 12;
+
+    TEST_ASSERT_EQUAL_INT(0, binary_search(input, length, 1));
+};
+
+void test_binary_search_search_last_element(void) {
+    int input[] = {1, 3, 5, 17, 21, 22, 53, 53, 53, 59, 102, 116};
+    int length = 12;
+
+    TEST_ASSERT_EQUAL_INT(11, binary_search(input, length, 116));
+};
+
+
+void test_binary_search_search_negative_values_first_element(void) {
+    int input[] = {-24, -12, -9, -7, -5, -3, -3, -2, -1};
+    int length = 9;
+
+    TEST_ASSERT_EQUAL_INT(0, binary_search(input, length, -24));
+};
+
+void test_binary_search_search_negative_values_last_element(void) {
+    int input[] = {-24, -12, -9, -7, -5, -3, -3, -2, -1};
+    int length = 9;
+
+    TEST_ASSERT_EQUAL_INT(8, binary_search(input, length, -1));
+};
+
+
+
 int main(void) {
     UNITY_BEGIN();
     
@@ -378,5 +469,20 @@ int main(void) {
     RUN_TEST(test_merge_sort_empty_array);
     RUN_TEST(test_merge_sort_already_sorted_array);
     RUN_TEST(test_merge_sort_sort_negative_values);
+
+    RUN_TEST(test_linearsearch_search_empty_array);
+    RUN_TEST(test_linearsearch_search_first_element);
+    RUN_TEST(test_linearsearch_search_last_element);
+    RUN_TEST(test_linearsearch_search_negative_values_first_element);
+    RUN_TEST(test_linearsearch_search_negative_values_last_element);
+    RUN_TEST(test_linearsearch_search_first_element_seen);
+    RUN_TEST(test_linearsearch_search_negative_values_first_element_seen);
+
+    RUN_TEST(test_binary_search_search_empty_array);
+    RUN_TEST(test_binary_search_search_first_element);
+    RUN_TEST(test_binary_search_search_last_element);
+    RUN_TEST(test_binary_search_search_negative_values_first_element);
+    RUN_TEST(test_binary_search_search_negative_values_last_element);
+  
     return UNITY_END();
 }
