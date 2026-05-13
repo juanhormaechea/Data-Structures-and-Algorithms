@@ -166,19 +166,17 @@ int* merge(int* arr1, int* arr2, int length1, int length2) {
         }
     };
 
-    if (i < length1) {
-        for (i; i < length1; i++) {
-            new_arr[z] = arr1[i];
-            z++;
-        };
-    };
+    while (i < length1) {
+        new_arr[z] = arr1[i];
+        i++;
+        z++;
+    }
 
-    if (j < length2) {
-        for (j; j < length2; j++) {
-            new_arr[z] = arr2[j];
-            z++;
-        };
-    };
+    while (j < length2) {
+        new_arr[z] = arr2[j];
+        j++;
+        z++;
+    }
 
     if (arr1 != NULL && length1 >= 2) {
         free(arr1);
@@ -198,7 +196,12 @@ int* merge_sort(int* arr, int length){
     int* sorted_left = merge_sort(arr, mid);
     int* sorted_right = merge_sort(&arr[length/2], length - mid);
 
-    return merge(sorted_left, sorted_right, mid, length - mid);
+    int* merged = merge(sorted_left, sorted_right, mid, length - mid);
+    for (int i = 0; i < length; i++) {
+        arr[i] = merged[i];
+    };
+
+    return merged;
     
     
 

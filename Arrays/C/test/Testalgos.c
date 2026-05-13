@@ -12,9 +12,9 @@ void tearDown(void) {
 //test cases for bubble sort
 
 void test_bubble_sort_sorts_unordered_array(void) {
-    int input[] = {65, 18, 34, 68, 69};
-    int expected[] = {18, 34, 65, 68, 69};
-    int length = 5;
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int expected[] = {1, 3, 5, 17, 21, 22, 53, 53, 53, 59, 102, 116};
+    int length = 12;
 
     int* arr = bubble_sort(input, length);
 
@@ -67,9 +67,9 @@ void test_bubble_sort_negative_values(void) {
 //test cases for selection sort
 
 void test_selection_sort_sorts_unordered_array(void) {
-    int input[] = {65, 18, 34, 68, 69};
-    int expected[] = {18, 34, 65, 68, 69};
-    int length = 5;
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int expected[] = {1, 3, 5, 17, 21, 22, 53, 53, 53, 59, 102, 116};
+    int length = 12;
 
     int* arr = selection_sort(input, length);
 
@@ -122,9 +122,9 @@ void test_selection_sort_negative_values(void) {
 //test cases for insertion sort
 
 void test_insertion_sort_sorts_unordered_array(void) {
-    int input[] = {65, 18, 34, 68, 69};
-    int expected[] = {18, 34, 65, 68, 69};
-    int length = 5;
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int expected[] = {1, 3, 5, 17, 21, 22, 53, 53, 53, 59, 102, 116};
+    int length = 12;
 
     int* arr = insertion_sort(input, length);
 
@@ -177,9 +177,9 @@ void test_insertion_sort_negative_values(void) {
 // test cases for quicksort
 
 void test_quicksort_sorts_unordered_array(void) {
-    int input[] = {65, 18, 34, 68, 69};
-    int expected[] = {18, 34, 65, 68, 69};
-    int length = 5;
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int expected[] = {1, 3, 5, 17, 21, 22, 53, 53, 53, 59, 102, 116};
+    int length = 12;
 
     int* arr = quicksort(input, length);
 
@@ -233,9 +233,9 @@ void test_quicksort_sort_negative_values(void) {
 // test cases for counting sort
 
 void test_counting_sort_sorts_unordered_array(void) {
-    int input[] = {65, 18, 34, 68, 69};
-    int expected[] = {18, 34, 65, 68, 69};
-    int length = 5;
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int expected[] = {1, 3, 5, 17, 21, 22, 53, 53, 53, 59, 102, 116};
+    int length = 12;
 
     int* arr = counting_sort(input, length);
 
@@ -288,13 +288,13 @@ void test_counting_sort_negative_values(void) {
 //tests for merge_sort
 
 void test_merge_sort_sorts_unordered_array(void) {
-    int input[] = {65, 18, 34, 68, 69};
-    int expected[] = {18, 34, 65, 68, 69};
-    int length = 5;
+    int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
+    int expected[] = {1, 3, 5, 17, 21, 22, 53, 53, 53, 59, 102, 116};
+    int length = 12;
 
     int* arr = merge_sort(input, length);
 
-    TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, input, length);
 };
 
 void test_merge_sort_sorts_array_single_element(void) {
@@ -304,6 +304,7 @@ void test_merge_sort_sorts_array_single_element(void) {
 
     int* arr = merge_sort(input, length);
 
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, input, length);
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
 };
 
@@ -324,6 +325,7 @@ void test_merge_sort_already_sorted_array(void) {
 
     int* arr = merge_sort(input, length);
 
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, input, length);
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
 };
 
@@ -334,6 +336,7 @@ void test_merge_sort_sort_negative_values(void) {
 
     int* arr = merge_sort(input, length);
 
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, input, length);
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
 }
 

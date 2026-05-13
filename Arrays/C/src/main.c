@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 int main() {
-   int arr[] = {1,7,2,2,5,2,5,2,1,5,8};
+   int arr[] = {5,17,59,1,53,102,3,53,21,116,53,22};
    for (int i = 0; i < sizeof(arr)/sizeof(int); i++) {
       printf("%d ", arr[i]);
    };
@@ -14,9 +14,10 @@ int main() {
       printf("%d ", sorted_arr[j]);
    }
    printf("\n");
-    for (int i = 0; i < sizeof(arr)/sizeof(int); i++) {
-      printf("%d ", arr[i]);
-   };
+   for (int j = 0; j < sizeof(arr)/sizeof(int); j++) {
+      printf("%d ", arr[j]);
+   }
+  
 
    
    return 0;
