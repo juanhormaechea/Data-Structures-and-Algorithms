@@ -285,6 +285,58 @@ void test_counting_sort_negative_values(void) {
     TEST_ASSERT_EQUAL_INT_ARRAY(untouched_input, input, length);
 }
 
+//tests for merge_sort
+
+void test_merge_sort_sorts_unordered_array(void) {
+    int input[] = {65, 18, 34, 68, 69};
+    int expected[] = {18, 34, 65, 68, 69};
+    int length = 5;
+
+    int* arr = merge_sort(input, length);
+
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
+};
+
+void test_merge_sort_sorts_array_single_element(void) {
+    int input[] = {65};
+    int expected[] = {65};
+    int length = 1;
+
+    int* arr = merge_sort(input, length);
+
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
+};
+
+void test_merge_sort_empty_array(void) {
+    int input[] = {};
+    int length = 0;
+    
+    int* arr = merge_sort(input, length);
+
+    TEST_ASSERT_EQUAL_INT(0, sizeof(input)/sizeof(int));
+};
+
+
+void test_merge_sort_already_sorted_array(void) {
+    int input[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int expected[] =  {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int length = 10;
+
+    int* arr = merge_sort(input, length);
+
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
+};
+
+void test_merge_sort_sort_negative_values(void) {
+    int input[] = {-1, -9, -2, -7, -5, -3, -12, -24, -3};
+    int expected[] = {-24, -12, -9, -7, -5, -3, -3, -2, -1};
+    int length = 9;
+
+    int* arr = merge_sort(input, length);
+
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
+}
+
 int main(void) {
     UNITY_BEGIN();
     
@@ -317,5 +369,11 @@ int main(void) {
     RUN_TEST(test_counting_sort_empty_array);
     RUN_TEST(test_counting_sort_already_sorted_array);
     RUN_TEST(test_counting_sort_negative_values);
+
+    RUN_TEST(test_merge_sort_sorts_unordered_array);
+    RUN_TEST(test_merge_sort_sorts_array_single_element);
+    RUN_TEST(test_merge_sort_empty_array);
+    RUN_TEST(test_merge_sort_already_sorted_array);
+    RUN_TEST(test_merge_sort_sort_negative_values);
     return UNITY_END();
 }

@@ -136,3 +136,70 @@ int* counting_sort(int* arr, int length) {
 
     return arr;
 }
+
+int* merge(int* arr1, int* arr2, int length1, int length2) {
+    if (length1 == 0) {
+        return arr2;
+    };
+
+    if (length2 == 0) {
+        return arr1;
+    };
+
+    int* new_arr = malloc((length1 + length2) * sizeof(int));
+    int i = 0, j = 0, z = 0;
+
+    if(!new_arr) {
+        perror("Memory allocation failed");
+        exit(1);
+    };
+    
+    while (i < length1 && j < length2) {
+        if (arr1[i] <= arr2[j]) {
+            new_arr[z] = arr1[i];
+            i++;
+            z++;
+        } else {
+            new_arr[z] = arr2[j];
+            j++;
+            z++;
+        }
+    };
+
+    if (i < length1) {
+        for (i; i < length1; i++) {
+            new_arr[z] = arr1[i];
+            z++;
+        };
+    };
+
+    if (j < length2) {
+        for (j; j < length2; j++) {
+            new_arr[z] = arr2[j];
+            z++;
+        };
+    };
+
+    if (arr1 != NULL && length1 >= 2) {
+        free(arr1);
+    };
+
+    if (arr2 != NULL && length2 >= 2) {
+        free(arr2);
+    }
+    return new_arr;
+}
+
+int* merge_sort(int* arr, int length){
+    if (length <= 1) {
+        return arr;
+    }
+    int mid = length/2;
+    int* sorted_left = merge_sort(arr, mid);
+    int* sorted_right = merge_sort(&arr[length/2], length - mid);
+
+    return merge(sorted_left, sorted_right, mid, length - mid);
+    
+    
+
+}
