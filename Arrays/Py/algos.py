@@ -82,5 +82,84 @@ def quicksort(arr, lower=0, upper=None):
     
     return arr
 
+# O(n+k) time complexity where k is the max value in array
+def counting_sort(arr):
+    if len(arr) <= 0:
+        return arr
+    
+    sorted_arr = [0] * (max(arr) + 1)
+    
+    for i in range(len(arr)):
+        sorted_arr[arr[i]] += 1
+
+    index = 0
+    for i in range(max(arr) + 1):
+        while (sorted_arr[i] > 0):
+            arr[index] = i
+            index += 1
+            sorted_arr[i] -= 1
+    
+    return arr
 
 
+def merge(left, right):
+    if len(left) == 0:
+        return right
+    
+    if len(right) == 0:
+        return left
+    
+    result = []
+    i = 0
+    j = 0
+
+    while (i < len(left) and j < len(right)):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i+=1
+        else:
+            result.append(right[j])
+            j+=1
+    
+    result.extend(left[i:])
+    result.extend(right[j:])
+
+    return result
+
+# time complexity of O(n·log_2(n))
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) // 2
+    sorted_left = merge_sort(arr[:mid])
+    sorted_right = merge_sort(arr[mid:])
+
+    arr = merge(sorted_left, sorted_right)
+    return arr
+
+
+
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+        
+    return -1
+
+
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+
+    while (left <= right):
+        mid = (left + right) // 2
+        if (arr[mid] == target):
+            return mid
+
+        if (arr[mid] < target):
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return -1

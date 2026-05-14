@@ -231,6 +231,13 @@ void test_quicksort_sort_negative_values(void) {
 
 
 // test cases for counting sort
+void test_counting_sort_preliminary(void) {
+    int input[] = {5,1,2,2,1,4,2,4,3,1,2,3};
+    int expected[] = {1, 1, 1, 2, 2, 2, 2, 3, 3, 4, 4, 5};
+
+    int* arr = counting_sort(input, 12);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, input, 12);
+}
 
 void test_counting_sort_sorts_unordered_array(void) {
     int input[] = {5,17,59,1,53,102,3,53,21,116,53,22};
@@ -274,16 +281,6 @@ void test_counting_sort_already_sorted_array(void) {
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, arr, length);
 };
 
-void test_counting_sort_negative_values(void) {
-    int input[] = {1, 2, 3, -1, 2, 3, 4};
-    int untouched_input[] = {1, 2, 3, -1, 2, 3, 4};
-    int length = 7;
-
-    int* arr = counting_sort(input, length);
-
-    TEST_ASSERT_NULL(arr);
-    TEST_ASSERT_EQUAL_INT_ARRAY(untouched_input, input, length);
-}
 
 //tests for merge_sort
 
@@ -458,11 +455,11 @@ int main(void) {
     RUN_TEST(test_quicksort_already_sorted_array);
     RUN_TEST(test_quicksort_sort_negative_values);
 
+    RUN_TEST(test_counting_sort_preliminary);
     RUN_TEST(test_counting_sort_sorts_unordered_array);
     RUN_TEST(test_counting_sort_sorts_array_single_element);
     RUN_TEST(test_counting_sort_empty_array);
     RUN_TEST(test_counting_sort_already_sorted_array);
-    RUN_TEST(test_counting_sort_negative_values);
 
     RUN_TEST(test_merge_sort_sorts_unordered_array);
     RUN_TEST(test_merge_sort_sorts_array_single_element);
