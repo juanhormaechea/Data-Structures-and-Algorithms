@@ -52,3 +52,35 @@ def insertion_sort(arr):
     return arr
 
 
+# lomuto partitioning algorithm for quicksort
+def partition(arr, lower, upper):
+    if len(arr) <= 1:
+        return lower
+    i = lower
+    pivot = arr[upper]
+    for j in range(lower, upper):
+        if arr[j] < pivot:
+            swap = arr[j]
+            arr[j] = arr[i]
+            arr[i] = swap
+            i+=1
+    
+    arr[upper] = arr[i]
+    arr[i] = pivot
+    if i == lower:
+        return lower + 1
+    
+    return i
+
+def quicksort(arr, lower=0, upper=None):
+    if upper is None:
+        upper = len(arr)-1
+    if (upper - lower) > 0:
+        pivot_index = partition(arr, lower, upper)
+        quicksort(arr, lower, pivot_index-1)
+        quicksort(arr, pivot_index, upper)
+    
+    return arr
+
+
+
