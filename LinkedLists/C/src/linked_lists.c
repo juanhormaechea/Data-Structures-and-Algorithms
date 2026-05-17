@@ -2,14 +2,30 @@
 #include <stdlib.h>
 #include "linked_lists.h"
 
-Node* insert_node(LinkedList* list, int node, int position) {
-    if (list == NULL || position < 1) {
+int size(LinkedList* list) {
+    if (list == NULL || list->head == NULL) {
+        return 0;
+    }
+
+    int size = 0;
+
+    Node* next = list->head;
+    while (next != NULL) {
+        size++;
+        next = next->next;
+    };
+
+    return size;
+};
+
+Node* insert_node(LinkedList* list, int node, int index) {
+    if (list == NULL || index < 0) {
         return NULL;
     };
 
     Node* head = list->head;
 
-    if (position == 1) {
+    if (index == 0) {
         Node* new_node = malloc(sizeof(Node));
         if(!new_node) {
             perror("malloc failed");
@@ -22,13 +38,13 @@ Node* insert_node(LinkedList* list, int node, int position) {
     };
 
     Node* next = head;
-    for (int i = 2; i < node; i++) {
-        if (next->next != NULL) {
-            next = next->next;
-        } else {
+    for (int i = 0; i < index-1; i++) {
+        if (next->next == NULL) {
             break;
-        };
-    };
+        }
+
+        next = next->next;
+    }
 
 
     Node* new_node = malloc(sizeof(Node));
@@ -42,5 +58,34 @@ Node* insert_node(LinkedList* list, int node, int position) {
     return new_node;
 
 
+}
+
+void remove_node(LinkedList* list, int node) {
+    if (list == NULL || list->head == NULL) {
+        return;
+    };
+
+    Node* head = list->head;
+    Node* next = head->next;
+
+    if (head->data == node) {
+        list->head = next;
+        free(head);
+        return;
+    };
+
+    while (next != NULL) {
+        if(next->data == node) {
+            head->next = next->next;
+            free(next);
+            return;
+        };
+        head = next;
+        next = next->next;
+    };
+
+    
+
+    return;
 }
 

@@ -14,7 +14,9 @@ struct LinkedList {
     Node* head;
 };
 
-Node* insert_node(LinkedList* list, int node, int position);
+Node* insert_node(LinkedList* list, int node, int index);
+
+int size(LinkedList* list);
 
 void remove_node(LinkedList* list, int node);
 

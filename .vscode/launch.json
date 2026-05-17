@@ -15,6 +15,21 @@
         "environment": [],
         "externalConsole": false,
         "MIMode": "lldb"
+    },
+     
+    {
+        "name": "(lldb) Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "/Users/juanhorma97/Data Structures and Algorithms/LinkedLists/C/src/main",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "lldb"
     }
+
+
     ]
 }
