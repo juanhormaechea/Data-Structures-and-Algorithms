@@ -28,6 +28,10 @@ void test_size_no_elements(void) {
 void test_size_one_element(void) {
     LinkedList list;
     list.head = malloc(sizeof(Node));
+    if (!list.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     list.head->data = 1;
     list.head->next = NULL;
 
@@ -38,10 +42,18 @@ void test_size_one_element(void) {
 void test_size_multiple_elements(void) {
     LinkedList list;
     list.head = malloc(sizeof(Node));
+    if (!list.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     Node* head = list.head;
     for (int i = 0; i < 9; i++) {
         head->data = i;
         Node* new_node = malloc(sizeof(Node));
+        if (!new_node) {
+        perror("memory allocation failed");
+        exit(1);
+        }
         head->next = new_node;
         head = head->next;
     };
@@ -76,6 +88,10 @@ void test_insert_returns_null_on_empty(void) {
 void test_insert_return_null_on_impossible_position(void) {
     LinkedList input;
     input.head = malloc(sizeof(Node));
+    if (!input.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     input.head->data = 1;
     input.head->next = NULL;
 
@@ -94,6 +110,10 @@ void test_insert_return_null_on_impossible_position(void) {
 void test_insert_first_position(void) {
     LinkedList input;
     input.head = malloc(sizeof(Node));
+    if (!input.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     input.head->data = 1;
     input.head->next = NULL;
 
@@ -117,10 +137,18 @@ void test_insert_first_position(void) {
 void test_insert_out_of_bounds(void) {
     LinkedList input;
     input.head = malloc(sizeof(Node));
+    if (!input.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     Node* head = input.head;
     for (int i = 1; i < 4; i++) {
         head->data = i;
         Node* new_node = malloc(sizeof(Node));
+        if (!new_node) {
+        perror("memory allocation failed");
+        exit(1);
+        }
         head->next = new_node;
         head = head->next;
     };
@@ -159,10 +187,18 @@ void test_insert_out_of_bounds(void) {
 void test_insert_middle_point(void) {
     LinkedList input;
     input.head = malloc(sizeof(Node));
+    if (!input.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     Node* head = input.head;
     for (int i = 1; i < 6; i++) {
         head->data = i;
         Node* new_node = malloc(sizeof(Node));
+        if (!new_node) {
+        perror("memory allocation failed");
+        exit(1);
+        }
         head->next = new_node;
         head = head->next;
     };
@@ -220,15 +256,27 @@ void test_remove_first_node(void) {
     LinkedList list2;
 
     list1.head = malloc(sizeof(Node));
+    if (!list1.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     list1.head->data = 1;
     list1.head->next = NULL;
 
     list2.head = malloc(sizeof(Node));
+    if (!list2.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     Node* head = list2.head;
     Node* next;
     for (int i = 1; i < 5; i++) {
         head->data = i;
         next = malloc(sizeof(Node));
+        if (!next) {
+        perror("memory allocation failed");
+        exit(1);
+        }
         head->next = next;
         head = head->next;
     };
@@ -261,11 +309,19 @@ void test_remove_first_node(void) {
 void test_remove_last_node(void) {
     LinkedList list;
     list.head = malloc(sizeof(Node));
+    if (!list.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     Node* head = list.head;
     Node* next;
     for (int i = 1; i < 6; i++) {
         head->data = i;
         next = malloc(sizeof(Node));
+        if (!next) {
+        perror("memory allocation failed");
+        exit(1);
+        }
         head->next = next;
         head = head->next;
     };
@@ -292,11 +348,19 @@ void test_remove_last_node(void) {
 void test_remove_middle_node(void) {
     LinkedList list;
     list.head = malloc(sizeof(Node));
+    if (!list.head) {
+        perror("memory allocation failed");
+        exit(1);
+    }
     Node* head = list.head;
     Node* next;
     for (int i = 1; i < 6; i++) {
         head->data = i;
         next = malloc(sizeof(Node));
+        if (!next) {
+        perror("memory allocation failed");
+        exit(1);
+        }
         head->next = next;
         head = head->next;
     };
@@ -321,7 +385,116 @@ void test_remove_middle_node(void) {
         free(head);
         head = next;
     };
-}
+};
+
+// tests for search node
+
+void test_search_null_list(void) {
+    LinkedList* list = NULL;
+
+    TEST_ASSERT_EQUAL_PTR(NULL, search_node(list, 1));
+};
+
+void test_search_empty_list(void) {
+    LinkedList list;
+    list.head = NULL;
+
+    TEST_ASSERT_EQUAL_PTR(NULL, search_node(&list, 1));
+
+};
+
+void test_search_first_node(void) {
+    LinkedList list1;
+    LinkedList list2;
+    list1.head = malloc(sizeof(Node));
+    list1.head->data = 1;
+    list1.head->next = NULL;
+
+    list2.head = malloc(sizeof(Node));
+    Node* head = list2.head;
+    for (int i = 1; i < 5; i++) {
+        head->data = i;
+        Node* next = malloc(sizeof(Node));
+        head->next = next;
+        head = next;
+    };
+    head->data = 5;
+    head->next = NULL;
+
+    Node* result1 = search_node(&list1, 1);
+    Node* result2 = search_node(&list2, 1);
+
+    TEST_ASSERT_EQUAL_INT(1, result1->data);
+    TEST_ASSERT_EQUAL_PTR(NULL, result1->next);
+
+    TEST_ASSERT_EQUAL_INT(1, result2->data);
+    TEST_ASSERT_EQUAL_INT(2, result2->next->data);
+    TEST_ASSERT_EQUAL_PTR(list2.head->next, result2->next);
+
+    free(list1.head);
+
+    head = list2.head;
+    Node* next;
+    while(head != NULL) {
+        next = head->next;
+        free(head);
+        head = next;
+    };
+};
+
+void test_search_last_node(void) {
+    LinkedList list;
+    list.head = malloc(sizeof(Node));
+    Node* head = list.head;
+    for (int i = 1; i < 7; i++) {
+        head->data = i;
+        Node* next = malloc(sizeof(Node));
+        head->next = next;
+        head = next;
+    };
+    head->data = 7;
+    head->next = NULL;
+
+    Node* result = search_node(&list, 7);
+
+    TEST_ASSERT_EQUAL_INT(7, result->data);
+    TEST_ASSERT_EQUAL_PTR(NULL, result->next);
+
+    head = list.head;
+    Node* next;
+    while(head != NULL) {
+        next = head->next;
+        free(head);
+        head = next;
+    };
+};
+
+void test_search_middle_node(void) {
+    LinkedList list;
+    list.head = malloc(sizeof(Node));
+    Node* head = list.head;
+    for (int i = 1; i < 7; i++) {
+        head->data = i;
+        Node* next = malloc(sizeof(Node));
+        head->next = next;
+        head = next;
+    };
+    head->data = 7;
+    head->next = NULL;
+
+    Node* result = search_node(&list, 4);
+
+    TEST_ASSERT_EQUAL_INT(4, result->data);
+    TEST_ASSERT_EQUAL_INT(5, result->next->data);
+
+    head = list.head;
+    Node* next;
+    while(head != NULL) {
+        next = head->next;
+        free(head);
+        head = next;
+    };
+};
 
 
 
@@ -346,6 +519,12 @@ int main(void) {
     RUN_TEST(test_remove_first_node);
     RUN_TEST(test_remove_last_node);
     RUN_TEST(test_remove_middle_node);
+
+    RUN_TEST(test_search_null_list);
+    RUN_TEST(test_search_empty_list);
+    RUN_TEST(test_search_first_node);
+    RUN_TEST(test_search_last_node);
+    RUN_TEST(test_search_middle_node);
 
     return UNITY_END();
 }

@@ -87,5 +87,22 @@ void remove_node(LinkedList* list, int node) {
     
 
     return;
-}
+};
+
+Node* search_node(LinkedList* list, int node) {
+    if (list == NULL) {
+        return NULL;
+    };
+    
+    Node* head = list->head;
+    while (head != NULL) {
+        if (head->data == node) {
+            return head;
+        };
+
+        head = head->next;
+    };
+
+    return NULL;
+};
 
