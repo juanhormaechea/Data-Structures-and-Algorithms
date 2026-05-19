@@ -1,5 +1,5 @@
 Arrays/C/build
 **/__pycache__/
 **/build/
-**/main.c
-**/main
+**/main*
+.vscode

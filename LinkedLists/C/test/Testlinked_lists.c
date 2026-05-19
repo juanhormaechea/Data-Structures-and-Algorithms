@@ -496,6 +496,153 @@ void test_search_middle_node(void) {
     };
 };
 
+// tests for sort list
+
+void test_sort_empty_list(void) {
+    LinkedList list;
+    list.head = NULL;
+    Node* output = sort_list(list.head, 0);
+    list.head = output;
+
+    int list_size = size(&list);
+
+    TEST_ASSERT_EQUAL_PTR(NULL, list.head);
+    TEST_ASSERT_EQUAL_INT(0, list_size);
+};
+
+void test_sort_one_element(void) {
+    LinkedList list;
+    list.head = malloc(sizeof(Node));
+    list.head->data = 1;
+    list.head->next = NULL;
+    list.head = sort_list(list.head, 1);
+    int list_size = size(&list);
+
+    TEST_ASSERT_EQUAL_INT(1, list_size);
+    TEST_ASSERT_EQUAL_INT(1, list.head->data);
+    TEST_ASSERT_EQUAL_PTR(NULL, list.head->next);
+
+    free(list.head);
+};
+
+void test_sort_even_size(void) {
+    int input_array[10] = {1,8,2,6,12,4,24,-1,3,63};
+    int expected[10] = {-1, 1, 2, 3, 4, 6, 8, 12, 24, 63};
+    int output_array[10];
+    LinkedList input_list;
+    LinkedList output_list;
+    input_list.head = malloc(sizeof(Node));
+    Node* head = input_list.head;
+    for (int i = 0; i < 9; i++) {
+        head->data = input_array[i];
+        Node* next = malloc(sizeof(Node));
+        head->next = next;
+        head = head->next;
+    };
+    head->data = input_array[9];
+    head->next = NULL;
+
+    output_list.head = sort_list(input_list.head, 10);
+    int size_list = size(&output_list);
+
+    head = output_list.head;
+    for (int i = 0; i < 10; i++) {
+        output_array[i] = head->data;
+        head = head->next;
+    };
+
+    TEST_ASSERT_EQUAL_INT(10, size_list);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, output_array, 10);
+    
+    Node* next;
+    head = output_list.head;
+    while (head != NULL) {
+        next = head->next;
+        free(head);
+        head = next;
+    };
+    
+
+};
+
+void test_sort_odd_size(void) {
+    int input_array[9] = {1,8,2,6,12,4,24,-1,3};
+    int expected[9] = {-1, 1, 2, 3, 4, 6, 8, 12, 24};
+    int output_array[9];
+    LinkedList input_list;
+    LinkedList output_list;
+    input_list.head = malloc(sizeof(Node));
+    Node* head = input_list.head;
+    for (int i = 0; i < 8; i++) {
+        head->data = input_array[i];
+        Node* next = malloc(sizeof(Node));
+        head->next = next;
+        head = head->next;
+    };
+    head->data = input_array[8];
+    head->next = NULL;
+
+    output_list.head = sort_list(input_list.head, 9);
+    int size_list = size(&output_list);
+
+    head = output_list.head;
+    for (int i = 0; i < 9; i++) {
+        output_array[i] = head->data;
+        head = head->next;
+    };
+
+    TEST_ASSERT_EQUAL_INT(9, size_list);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, output_array, 9);
+    
+    Node* next;
+    head = output_list.head;
+    while (head != NULL) {
+        next = head->next;
+        free(head);
+        head = next;
+    };
+}
+
+void test_sort_negatives(void) {
+    int input_array[10] = {-5, -3, -8, -2, -7, -4, -9, -6, -1, -0};
+    int expected[10] = {-9, -8, -7, -6, -5, -4, -3, -2, -1, -0};
+    int output_array[10];
+    LinkedList input_list;
+    LinkedList output_list;
+    input_list.head = malloc(sizeof(Node));
+    Node* head = input_list.head;
+    for (int i = 0; i < 9; i++) {
+        head->data = input_array[i];
+        Node* next = malloc(sizeof(Node));
+        head->next = next;
+        head = head->next;
+    };
+    head->data = input_array[9];
+    head->next = NULL;
+    output_list.head = sort_list(input_list.head, 10);
+    int size_list = size(&output_list);
+
+    head = output_list.head;
+    for (int i = 0; i < 10; i++) {
+        output_array[i] = head->data;
+        head = head->next;
+    };
+
+    TEST_ASSERT_EQUAL_INT(10, size_list);
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, output_array, 10);
+
+    Node* next;
+    head = output_list.head;
+    while (head != NULL) {
+        next = head->next;
+        free(head);
+        head = next;
+    };
+
+
+
+};
+
 
 
 
@@ -525,6 +672,12 @@ int main(void) {
     RUN_TEST(test_search_first_node);
     RUN_TEST(test_search_last_node);
     RUN_TEST(test_search_middle_node);
+
+    RUN_TEST(test_sort_empty_list);
+    RUN_TEST(test_sort_even_size);
+    RUN_TEST(test_sort_odd_size);
+    RUN_TEST(test_sort_one_element);
+    RUN_TEST(test_sort_negatives);
 
     return UNITY_END();
 }

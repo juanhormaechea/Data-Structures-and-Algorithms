@@ -106,3 +106,53 @@ Node* search_node(LinkedList* list, int node) {
     return NULL;
 };
 
+Node* merge(Node* list1, Node* list2) {
+    if (list1 == NULL) {
+        return list2;
+    };
+     
+    if (list2 == NULL) {
+        return list1;
+    };
+
+    if (list1->data <= list2->data) {
+        list1->next = merge(list1->next, list2);
+        return list1;
+    } else {
+        list2->next = merge(list1, list2->next);
+        return list2;
+    };
+
+
+    
+
+
+};
+
+Node* sort_list(Node* list, int list_size) {
+    if (list == NULL || list_size <= 1) {
+        return list;
+    };
+
+    int mid = list_size/2;
+    Node* prev = list;
+    for (int i = 0; i < mid-1; i++) {
+        prev = prev->next;
+    };
+
+    Node* head_right = prev->next;
+    prev->next = NULL;
+
+    
+
+    Node* sorted_left = sort_list(list, mid);
+    Node* sorted_right = sort_list(head_right, list_size-mid);
+
+    return merge(sorted_left,sorted_right);
+
+    
+    
+    
+
+
+};

@@ -22,7 +22,7 @@ void remove_node(LinkedList* list, int node);
 
 Node* search_node(LinkedList* list, int node);
 
-void sort_list(LinkedList* list);
+Node* sort_list(Node* list, int size);
 
 
 
