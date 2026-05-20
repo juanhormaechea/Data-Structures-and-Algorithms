@@ -67,7 +67,60 @@ class TestPop(unittest.TestCase):
             head = head.next
         self.assertEqual(8, head.data)
 
+
+class TestInsert(unittest.TestCase):
+    def test_index_out_of_bounds(self):
+        list = linked_lists.LinkedList()
+        self.assertRaises(ValueError, list.insert_node, 1, -1)
+        self.assertRaises(ValueError, list.insert_node, 1, 1)
         
+        for i in range(0, 5):
+            list.append(i)
+
+        self.assertRaises(ValueError, list.insert_node, 5, 6)
+        self.assertRaises(ValueError, list.insert_node, 6, -1)
+
+    def test_empty_list(self):
+        list = linked_lists.LinkedList()
+        list.insert_node(1, 0)
+        self.assertEqual(1, list.get_size())
+        self.assertEqual(list.head.data, 1)
+        self.assertIsNone(list.head.next)
+    
+    def test_insert_start_of_list(self):
+        list = linked_lists.LinkedList()
+        list.head = linked_lists.Node(1)
+        list._size+=1
+        list.insert_node(0, 0)
+        self.assertEqual(2, list.get_size())
+        self.assertEqual(0, list.head.data)
+        self.assertEqual(1, list.pop())
+
+    def test_insert_end_of_list(self):
+        list = linked_lists.LinkedList()
+        for i in range(0, 5):
+            list.append(i)
+            
+        list.insert_node(5, 5)
+        self.assertEqual(6, list.get_size())
+        head = list.head
+        for i in range(1, 5):
+            head = head.next
+        self.assertEqual(5, head.next.data)
+        self.assertIsNone(head.next.next)
+    
+    def test_insert_middle_point(self):
+        list = linked_lists.LinkedList()
+        for i in range(0, 5):
+            list.append(i)
+        list.insert_node(24, 3)
+        self.assertEqual(6, list.get_size())
+        head = list.head
+        for i in range(1, 4):
+            head = head.next
+        self.assertEqual(24, head.data)
+        
+            
         
 
 if __name__ == '__main__':
