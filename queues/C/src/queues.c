@@ -10,7 +10,7 @@ void enqueue(Queue* queue, int element) {
     Node* new_element = malloc(sizeof(Node));
     new_element->data = element;
     new_element->next = NULL;
-    if (queue->back == NULL) {
+    if (queue->size == 0) {
         queue->back = new_element;
         queue->front = new_element;
         queue->size++;
@@ -25,7 +25,7 @@ void enqueue(Queue* queue, int element) {
 
 
 bool dequeue(Queue* queue, int* dequeued_value) {
-    if (queue == NULL || queue->front == NULL) {
+    if (queue == NULL || queue->size == 0) {
         return false;
     };
 
@@ -33,6 +33,9 @@ bool dequeue(Queue* queue, int* dequeued_value) {
     Node* next = queue->front->next;
     free(queue->front);
     queue->front = next;
+    if (queue->size == 1) {
+        queue->back = next;
+    };
     queue->size--;
     return true;
 };
