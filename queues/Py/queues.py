@@ -31,6 +31,8 @@ class Queue:
         dequeued_value = self.front.data
         next = self.front.next
         self.front = next
+        if self._size == 1:
+            self.back = next
         self._size-=1
         return dequeued_value
     
