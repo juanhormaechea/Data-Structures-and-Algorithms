@@ -4,3 +4,5 @@ Arrays/C/build
 **/main*
 .vscode
 Unity
+**/makefile
+**/Makefile
