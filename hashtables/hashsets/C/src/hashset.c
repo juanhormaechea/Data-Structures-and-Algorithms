@@ -124,6 +124,7 @@ bool hashset_remove(HashSet *set, int value) {
       return true;
     };
 
+    head = next;
     next = next->next;
   };
 

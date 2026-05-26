@@ -55,6 +55,7 @@ class HashSet:
                 head.next = next.next
                 self.num_elements-=1
                 return True
+            head = next
             next = next.next
         
         return False
