@@ -25,6 +25,8 @@ bool hashmap_add(HashMap *map, int key, int value);
 
 bool hashmap_remove(HashMap *map, int key);
 
+void hashmap_resize(HashMap *map);
+
 bool hashmap_get(HashMap *map, int key, int *retrieved_value);
 
 uint32_t knuth_hash(int key);

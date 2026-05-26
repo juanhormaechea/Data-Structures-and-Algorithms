@@ -49,6 +49,9 @@ void hashmap_destroy(HashMap *map) {
     };
   };
 
+  free(map->map);
+  free(map);
+
   return;
 };
 
@@ -129,3 +132,71 @@ bool hashmap_remove(HashMap *map, int key) {
 
   return false;
 };
+
+void hashmap_resize(HashMap *map) {
+  if (map == NULL) {
+    return;
+  };
+  int new_size = 2 * map->size;
+  if (__builtin_ctz(new_size) > 30) {
+    return;
+  };
+
+  Node **new_map = calloc(new_size, sizeof(Node *));
+
+  if (new_map == NULL) {
+    return;
+  };
+
+  Node *head;
+  Node *next;
+  Node *new_head;
+  int new_index;
+  int p = __builtin_ctz(new_size);
+  for (int i = 0; i < map->size; i++) {
+    head = map->map[i];
+    while (head != NULL) {
+      next = head->next;
+      Node *new_node = malloc(sizeof(Node));
+      new_node->data[0] = head->data[0];
+      new_node->data[1] = head->data[1];
+      new_node->next = NULL;
+      new_index = knuth_hash(new_node->data[0]) >> (32 - p);
+      new_head = new_map[new_index];
+      if (new_head == NULL) {
+        new_map[new_index] = new_node;
+
+      } else {
+        while (new_head->next != NULL) {
+          new_head = new_head->next;
+        };
+        new_head->next = new_node;
+      };
+      free(head);
+      head = next;
+    };
+  };
+  map->size = new_size;
+  map->map = new_map;
+}
+
+bool hashmap_get(HashMap *map, int key, int *retrieved_value) {
+  if (map == NULL) {
+    return false;
+  };
+
+  int p = __builtin_ctz(map->size);
+  int index = knuth_hash(key) >> (32 - p);
+  Node *head = map->map[index];
+  while (head != NULL) {
+    if (head->data[0] == key) {
+      *retrieved_value = head->data[1];
+      return true;
+    };
+    head = head->next;
+  };
+
+  return false;
+};
+
+uint32_t knuth_hash(int key) { return (uint32_t)key * 2654435761u; };

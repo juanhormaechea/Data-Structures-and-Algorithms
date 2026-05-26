@@ -152,6 +152,9 @@ bool hashset_contains(HashSet *set, int value) {
 };
 
 void hashset_resize(HashSet *set) {
+  if (set == NULL) {
+    return;
+  };
   int new_size = 2 * set->size;
   if (__builtin_ctz(new_size) > 30) {
     return;
