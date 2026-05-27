@@ -59,3 +59,87 @@ Node *insert(Node *root, int data) {
 
   return root;
 };
+
+Node *del(Node *root, int data) { return NULL; };
+
+Node *search(Node *root, int data) {
+  if (root == NULL) {
+    return NULL;
+  };
+
+  if (root->data == data) {
+    return root;
+  };
+
+  if (root->data < data) {
+    return search(root->right_child, data);
+  };
+
+  return search(root->left_child, data);
+};
+
+Node *findMin(Node *root) {
+  if (root == NULL) {
+    return NULL;
+  };
+
+  if (root->left_child == NULL) {
+    return root;
+  };
+
+  return findMin(root->left_child);
+};
+
+Node *findMax(Node *root) {
+  if (root == NULL) {
+    return NULL;
+  };
+
+  if (root->right_child == NULL) {
+    return root;
+  };
+
+  return findMax(root->right_child);
+};
+
+void inOrder(Node *root) {
+  if (root == NULL) {
+    return;
+  };
+
+  inOrder(root->left_child);
+  printf("%d ", root->data);
+  inOrder(root->right_child);
+  return;
+};
+
+void preOrder(Node *root) {
+  if (root == NULL) {
+    return;
+  };
+
+  printf("%d ", root->data);
+  preOrder(root->left_child);
+  preOrder(root->right_child);
+};
+
+void postOrder(Node *root) {
+  if (root == NULL) {
+    return;
+  };
+
+  postOrder(root->left_child);
+  postOrder(root->right_child);
+  printf("%d ", root->data);
+};
+
+int height(Node *root) {
+  if (root == NULL) {
+    return 0;
+  };
+
+  int height_left = height(root->left_child);
+  int height_right = height(root->right_child);
+
+  return ((height_left >= height_right) ? height_left : height_right);
+}
