@@ -17,7 +17,7 @@ class HashSet:
         n = value
         num_zeros = 0
         while n > 1:
-            n /= 2
+            n //= 2
             num_zeros+=1
         return num_zeros
 
