@@ -71,6 +71,9 @@ bool hashmap_add(HashMap *map, int key, int value) {
     new_node->next = NULL;
     map->map[index] = new_node;
     map->num_elements++;
+    if (((double)map->num_elements / map->size) > map->max_load_factor) {
+      hashmap_resize(map);
+    };
     return true;
   };
 
@@ -92,6 +95,9 @@ bool hashmap_add(HashMap *map, int key, int value) {
     new_node->next = NULL;
     head->next = new_node;
     map->num_elements++;
+    if (((double)map->num_elements / map->size) > map->max_load_factor) {
+      hashmap_resize(map);
+    };
   };
 
   return true;
