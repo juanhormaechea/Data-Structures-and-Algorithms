@@ -1,4 +1,3 @@
-Arrays/C/build
 **/__pycache__/
 **/build/
 **/main*
@@ -6,3 +5,4 @@ Arrays/C/build
 Unity
 **/makefile
 **/Makefile
+Data Structures and Algorithms.code-workspace
