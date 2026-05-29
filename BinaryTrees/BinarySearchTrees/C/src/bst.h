@@ -42,7 +42,7 @@ int size(Node *root);
 
 bool isEmpty(Node *root);
 
-bool isBST(Node *root, int min, int max);
+bool validateBST(Node *root);
 
 Node *findSuccessor(Node *root, int data);
 
