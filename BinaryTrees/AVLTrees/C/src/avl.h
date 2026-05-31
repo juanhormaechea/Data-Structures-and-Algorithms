@@ -19,7 +19,7 @@ AVLNode *createNode(int data);
 
 AVLT *createAVLT();
 
-void destroyBST(AVLT *tree);
+void destroyAVLT(AVLT *tree);
 
 AVLNode *insert(AVLNode *root, int data);
 
@@ -43,14 +43,12 @@ int size(AVLNode *root);
 
 bool isEmpty(AVLNode *root);
 
-bool validateBST(AVLNode *root);
+bool validateAVLT(AVLNode *root);
 
 AVLNode *findSuccessor(AVLNode *root, int data);
 
 AVLNode *findPredecessor(AVLNode *root, int data);
 
 int countLeaves(AVLNode *root);
-
-bool isBalanced(AVLNode *root);
 
 #endif
