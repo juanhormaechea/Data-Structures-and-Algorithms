@@ -33,7 +33,7 @@ Person* highestRankedHasNotProposedTo(Person* person, int sizeOfPreferenceList) 
         return NULL;
     };
 
-    if (sizeOfPreferenceList <= 0) {
+    if (sizeOfPreferenceList <= 0 || person->preferenceList == NULL) {
         fprintf(stderr, "preference list must be non-empty");
         return NULL;
     };
@@ -87,7 +87,7 @@ Person*** GS(Person** men, Person** women, int size) {
         return NULL;
     };
 
-    if (size <=0 ) {
+    if (size <= 0) {
         fprintf(stderr, "list of men and women must be non-empty");
         return NULL;
     };
